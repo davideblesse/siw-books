@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Modifica recensione</title>
+</head>
+<body>
+
+<h1>Modifica la tua recensione</h1>
+
+<form th:action="@{/books/{bookId}/reviews/{reviewId}/edit(
+                     bookId=${bookId},
+                     reviewId=${editReview.id})}"
+      th:object="${editReview}"
+      method="post">
+
+  <div>
+    <label>Titolo:
+      <input type="text" th:field="*{title}" />
+    </label>
+    <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+  </div>
+
+  <div>
+    <label>Testo:
+      <textarea th:field="*{text}"></textarea>
+    </label>
+    <div th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></div>
+  </div>
+
+  <div>
+    <label>Voto:
+      <input type="number" min="1" max="5" th:field="*{mark}" />
+    </label>
+    <div th:if="${#fields.hasErrors('mark')}" th:errors="*{mark}"></div>
+  </div>
+
+  <button type="submit">Aggiorna</button>
+  <a th:href="@{'/books/' + ${bookId}}">Annulla</a>
+</form>
+
+</body>
+</html>

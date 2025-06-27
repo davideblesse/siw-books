@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Errore - Siwbooks</title>
+    <style>
+      body { font-family: sans-serif; margin: 2em; }
+      h1 { color: #c00; }
+      .details p { margin: 0.5em 0; }
+    </style>
+</head>
+<body>
+    <h1>Si è verificato un errore</h1>
+    <div class="details">
+      <p th:text="'Status: ' + ${status}">Status: ?</p>
+      <p th:text="'Errore: ' + ${error}">Errore: ?</p>
+      <p th:text="'Messaggio: ' + ${message}">Messaggio: ?</p>
+      <p th:text="'Path: ' + ${path}">Path: ?</p>
+      <p th:text="'Timestamp: ' + ${timestamp}">Timestamp: ?</p>
+    </div>
+    <p><a th:href="@{/}">← Torna alla pagina principale</a></p>
+</body>
+</html>

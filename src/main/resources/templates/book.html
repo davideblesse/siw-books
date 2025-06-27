@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="it"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${book.title}">Dettaglio Libro</title>
+  <link rel="stylesheet" th:href="@{/css/book.css}">
+</head>
+<body>
+
+  <h1 th:text="${book.title}">Titolo</h1>
+  <p th:text="'Anno: ' + ${book.publicationYear}">Anno</p>
+
+  <h2>Autori</h2>
+  <ul>
+    <li th:each="author : ${book.authors}"
+        th:text="${author.name} + ' ' + ${author.surname}">Autore</li>
+  </ul>
+
+  <h2>Immagini</h2>
+  <div class="images-container">
+    <p class="no-images" th:if="${book.images.empty}">Nessuna immagine disponibile</p>
+    <img th:each="img : ${book.images}"
+         th:src="@{${img.name}}"
+         alt="Copertina" />
+  </div>
+
+  <h2>Recensioni</h2>
+  <ul>
+    <li th:each="rev : ${book.reviews}">
+      <strong th:text="${rev.title}">Titolo recensione</strong> —
+      <span th:text="${rev.mark}">Voto</span><br/>
+      <p th:text="${rev.text}">Testo recensione</p>
+      <small th:text="'di ' + ${rev.user.nome} + ' ' + ${rev.user.cognome}">
+        Autore
+      </small>
+
+      <div>
+      <a th:if="${currentUserId} == ${rev.user.id}"
+        th:href="@{/books/{bookId}/reviews/{revId}/edit(
+                    bookId=${book.id},
+                    revId=${rev.id})}">
+        Modifica
+      </a>
+
+        <form th:if="${currentUserId} == ${rev.user.id}"
+              th:action="@{/books/{bookId}/reviews/{revId}/delete(
+                             bookId=${book.id},
+                             revId=${rev.id})}"
+              method="post" style="display:inline">
+          <input type="hidden" name="userId" th:value="${currentUserId}" />
+          <button type="submit">Elimina</button>
+        </form>
+      </div>
+    </li>
+  </ul>
+
+  <div sec:authorize="isAuthenticated()">
+    <div th:if="${canReview}">
+      <h2>Aggiungi la tua recensione</h2>
+      <form th:action="@{/books/{bookId}/reviews(bookId=${book.id})}"
+            th:object="${newReview}" method="post">
+
+        <input type="hidden" name="userId" th:value="${currentUserId}" />
+
+        <div>
+          <label>Titolo:
+            <input type="text" th:field="*{title}" />
+          </label>
+          <div th:if="${#fields.hasErrors('title')}"
+               th:errors="*{title}"></div>
+        </div>
+
+        <div>
+          <label>Testo:
+            <textarea th:field="*{text}"></textarea>
+          </label>
+          <div th:if="${#fields.hasErrors('text')}"
+               th:errors="*{text}"></div>
+        </div>
+
+        <div>
+          <label>Voto:
+            <input type="number" min="1" max="5" th:field="*{mark}" />
+          </label>
+          <div th:if="${#fields.hasErrors('mark')}"
+               th:errors="*{mark}"></div>
+        </div>
+
+        <button type="submit">Invia recensione</button>
+      </form>
+    </div>
+    <div th:unless="${canReview}">
+      <p>Hai già recensito questo libro.</p>
+    </div>
+  </div>
+
+  <div sec:authorize="!isAuthenticated()">
+    <p><a th:href="@{/login}">Accedi</a> per scrivere una recensione.</p>
+  </div>
+
+</body>
+</html>

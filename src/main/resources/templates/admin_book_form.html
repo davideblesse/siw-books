@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${action=='create' ? 'Nuovo libro' : 'Modifica libro'}">Libro</title>
+</head>
+<body>
+<h1 th:text="${action=='create' ? 'Inserisci nuovo libro' : 'Modifica libro'}"></h1>
+
+<!-- FORM CREAZIONE -->
+<form th:if="${action=='create'}"
+      th:action="@{/admin/books}"
+      th:object="${book}"
+      method="post">
+
+  <div>
+    <label>Titolo:
+      <input type="text" th:field="*{title}" required />
+    </label>
+  </div>
+
+  <div>
+    <label>Anno di pubblicazione:
+      <input type="number" th:field="*{publicationYear}" min="0" required />
+    </label>
+  </div>
+
+  <button type="submit">Crea</button>
+  <a th:href="@{/books}">Annulla</a>
+</form>
+
+<!-- FORM MODIFICA -->
+<form th:if="${action=='edit'}"
+      th:action="@{/admin/books/{id}/edit(id=${book.id})}"
+      th:object="${book}"
+      method="post">
+
+  <div>
+    <label>Titolo:
+      <input type="text" th:field="*{title}" required />
+    </label>
+  </div>
+
+  <div>
+    <label>Anno di pubblicazione:
+      <input type="number" th:field="*{publicationYear}" min="0" required />
+    </label>
+  </div>
+
+  <button type="submit">Aggiorna</button>
+  <a th:href="@{/books}">Annulla</a>
+</form>
+
+</body>
+</html>

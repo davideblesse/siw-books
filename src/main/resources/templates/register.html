@@ -1,0 +1,20 @@
+<form th:action="@{/register}" th:object="${credentials}" method="post">
+  <div>
+    <label>Username: <input th:field="*{username}"/></label>
+    <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+  </div>
+  <div>
+    <label>Password: <input type="password" th:field="*{password}"/></label>
+    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+  </div>
+  <div>
+    <label>Nome: <input th:field="*{user.nome}"/></label>
+  </div>
+  <div>
+    <label>Cognome: <input th:field="*{user.cognome}"/></label>
+  </div>
+  <div>
+    <label>Email: <input th:field="*{user.email}"/></label>
+  </div>
+  <button type="submit">Registrati</button>
+</form>

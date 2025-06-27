@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Catalogo libri</title>
+  <link rel="stylesheet" th:href="@{/css/books.css}">
+</head>
+<body>
+
+<h1>Catalogo libri</h1>
+
+<div th:if="${books.empty}">
+  Nessun libro disponibile
+</div>
+
+<div class="books-grid" th:unless="${books.empty}">
+  <div class="book-card" th:each="book : ${books}">
+    <div class="book-cover-wrapper">
+      <!-- prima immagine se presente -->
+      <img th:if="${book.images != null and !book.images.empty}"
+           th:src="${book.images.iterator().next().name}"
+           width="126" alt="Copertina"/>
+
+      <!-- placeholder se nessuna immagine -->
+      <img th:unless="${book.images != null and !book.images.empty}"
+           src="https://placehold.co/126x178?text=Nessuna+immagine"
+           width="126" alt="Nessuna immagine disponibile"/>
+    </div>
+
+    <div class="book-title" th:text="${book.title}">Titolo libro</div>
+
+    <a class="view-details-link"
+       th:href="@{'/books/' + ${book.id}}">
+       Dettagli
+    </a>
+  </div>
+</div>
+
+</body>
+</html>

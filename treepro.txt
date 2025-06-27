@@ -1,0 +1,1841 @@
+PROJECT STRUCTURE :
+siwbooks
+├── .gitattributes
+├── .gitignore
+├── .mvn/
+│   └── wrapper/
+│       └── maven-wrapper.properties
+├── local-postgres.session.sql
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── it/
+│   │   │       └── uniroma3/
+│   │   │           └── siwbooks/
+│   │   │               ├── SiwbooksApplication.java
+│   │   │               ├── authentication/
+│   │   │               │   ├── AuthConfiguration.java
+│   │   │               │   └── SecurityBeansConfig.java
+│   │   │               ├── constant/
+│   │   │               │   └── Nationality.java
+│   │   │               ├── controller/
+│   │   │               │   ├── BookController.java
+│   │   │               │   ├── LoginController.java
+│   │   │               │   ├── RegisterController.java
+│   │   │               │   └── ReviewController.java
+│   │   │               ├── model/
+│   │   │               │   ├── Author.java
+│   │   │               │   ├── Book.java
+│   │   │               │   ├── Credentials.java
+│   │   │               │   ├── ImageEntity.java
+│   │   │               │   ├── Review.java
+│   │   │               │   └── User.java
+│   │   │               ├── repository/
+│   │   │               │   ├── BookRepository.java
+│   │   │               │   ├── CredentialsRepository.java
+│   │   │               │   ├── ImageEntityRepository.java
+│   │   │               │   ├── ReviewRepository.java
+│   │   │               │   └── UserRepository.java
+│   │   │               └── service/
+│   │   │                   ├── BookService.java
+│   │   │                   ├── CredentialsService.java
+│   │   │                   ├── ImageEntityService.java
+│   │   │                   └── ReviewService.java
+│   │   ├── resources/
+│   │   │   ├── application.properties
+│   │   │   ├── import.sql
+│   │   │   ├── static/
+│   │   │   │   ├── css/
+│   │   │   │   │   ├── book.css
+│   │   │   │   │   └── books.css
+│   │   │   │   └── images/
+│   │   │   │       ├── Arthur_Conan_Doyle.jpg
+│   │   │   │       ├── Reki_Kawahara.jpg
+│   │   │   │       ├── Sword_Art_Online_Aincrad_1.jpg
+│   │   │   │       ├── Sword_Art_Online_Aincrad_1_1.jpg
+│   │   │   │       ├── Sword_Art_Online_Aincrad_2.jpg
+│   │   │   │       └── Tutto_Sherlock_Holmes.jpg
+│   │   │   └── templates/
+│   │   │       ├── book.html
+│   │   │       ├── books.html
+│   │   │       ├── error.html
+│   │   │       ├── login.html
+│   │   │       └── register.html
+│   │   └── treepro.txt
+│   └── test/
+│       └── java/
+│           └── it/
+│               └── uniroma3/
+│                   └── siwbooks/
+│                       └── SiwbooksApplicationTests.java
+└── treepro.txt
+
+
+SELECTED FILES:
+- pom.xml
+- src/main/java/it/uniroma3/siwbooks/SiwbooksApplication.java
+- src/main/java/it/uniroma3/siwbooks/authentication/AuthConfiguration.java
+- src/main/java/it/uniroma3/siwbooks/authentication/SecurityBeansConfig.java
+- src/main/java/it/uniroma3/siwbooks/constant/Nationality.java
+- src/main/java/it/uniroma3/siwbooks/controller/BookController.java
+- src/main/java/it/uniroma3/siwbooks/controller/LoginController.java
+- src/main/java/it/uniroma3/siwbooks/controller/RegisterController.java
+- src/main/java/it/uniroma3/siwbooks/controller/ReviewController.java
+- src/main/java/it/uniroma3/siwbooks/model/Author.java
+- src/main/java/it/uniroma3/siwbooks/model/Book.java
+- src/main/java/it/uniroma3/siwbooks/model/Credentials.java
+- src/main/java/it/uniroma3/siwbooks/model/ImageEntity.java
+- src/main/java/it/uniroma3/siwbooks/model/Review.java
+- src/main/java/it/uniroma3/siwbooks/model/User.java
+- src/main/java/it/uniroma3/siwbooks/repository/BookRepository.java
+- src/main/java/it/uniroma3/siwbooks/repository/CredentialsRepository.java
+- src/main/java/it/uniroma3/siwbooks/repository/ImageEntityRepository.java
+- src/main/java/it/uniroma3/siwbooks/repository/ReviewRepository.java
+- src/main/java/it/uniroma3/siwbooks/repository/UserRepository.java
+- src/main/java/it/uniroma3/siwbooks/service/BookService.java
+- src/main/java/it/uniroma3/siwbooks/service/CredentialsService.java
+- src/main/java/it/uniroma3/siwbooks/service/ImageEntityService.java
+- src/main/java/it/uniroma3/siwbooks/service/ReviewService.java
+- src/main/resources/application.properties
+- src/main/resources/import.sql
+- src/main/resources/static/css/book.css
+- src/main/resources/static/css/books.css
+- src/main/resources/static/images/Arthur_Conan_Doyle.jpg
+- src/main/resources/static/images/Reki_Kawahara.jpg
+- src/main/resources/static/images/Sword_Art_Online_Aincrad_1.jpg
+- src/main/resources/static/images/Sword_Art_Online_Aincrad_1_1.jpg
+- src/main/resources/static/images/Sword_Art_Online_Aincrad_2.jpg
+- src/main/resources/static/images/Tutto_Sherlock_Holmes.jpg
+- src/main/resources/templates/book.html
+- src/main/resources/templates/books.html
+- src/main/resources/templates/error.html
+- src/main/resources/templates/login.html
+- src/main/resources/templates/register.html
+- src/main/treepro.txt
+- src/test/java/it/uniroma3/siwbooks/SiwbooksApplicationTests.java
+
+CONTENT OF SELECTED FILES:
+
+--- pom.xml ---
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.5.3</version>
+    <relativePath/>
+  </parent>
+
+  <groupId>it.uniroma3</groupId>
+  <artifactId>siwbooks</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>siwbooks</name>
+  <description>Demo project for Spring Boot</description>
+
+  <properties>
+    <java.version>21</java.version>
+  </properties>
+
+  <dependencies>
+    <!-- Persistenza -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+
+    <!-- Template engine -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+
+    <!-- Validazione bean -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+
+    <!-- Web MVC -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!-- Driver PostgreSQL -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.thymeleaf.extras</groupId>
+      <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+    </dependency>
+
+
+
+    <!-- Testing -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
+
+
+--- src/main/java/it/uniroma3/siwbooks/SiwbooksApplication.java ---
+package it.uniroma3.siwbooks;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class SiwbooksApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SiwbooksApplication.class, args);
+	}
+
+}
+
+
+--- src/main/java/it/uniroma3/siwbooks/authentication/AuthConfiguration.java ---
+// src/main/java/it/uniroma3/siwbooks/auth/AuthConfiguration.java
+package it.uniroma3.siwbooks.authentication;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.*;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
+import it.uniroma3.siwbooks.model.Credentials;
+import it.uniroma3.siwbooks.service.CredentialsService;
+
+@Configuration
+@EnableWebSecurity
+public class AuthConfiguration {
+
+    @Autowired private CredentialsService userDetailsService;
+    @Autowired private PasswordEncoder     passwordEncoder;
+
+    @Bean
+    public DaoAuthenticationProvider authProvider() {
+      DaoAuthenticationProvider p = new DaoAuthenticationProvider();
+      p.setUserDetailsService(userDetailsService);
+      p.setPasswordEncoder(passwordEncoder);
+      return p;
+    }
+
+  @Bean
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    http
+      .authenticationProvider(authProvider())
+      .csrf().disable()
+      .authorizeHttpRequests(auth -> auth
+          .requestMatchers("/", "/books/**", "/register", "/login", "/css/**", "/images/**")
+            .permitAll()
+          .requestMatchers("/admin/**")
+            .hasRole(Credentials.ADMIN_ROLE)    // es. "ADMIN"
+          .requestMatchers("/user/**")
+            .hasRole(Credentials.DEFAULT_ROLE)  // es. "DEFAULT"
+          .anyRequest().authenticated()
+      )
+      .formLogin(form -> form
+          .loginPage("/login")
+          .loginProcessingUrl("/login")
+          .usernameParameter("username")
+          .passwordParameter("pwd")
+          .defaultSuccessUrl("/", true)
+          .permitAll()
+      )
+      .logout(logout -> logout
+          .logoutSuccessUrl("/")
+          .permitAll()
+      );
+    return http.build();
+  }
+}
+
+
+--- src/main/java/it/uniroma3/siwbooks/authentication/SecurityBeansConfig.java ---
+// src/main/java/it/uniroma3/siwbooks/auth/SecurityBeansConfig.java
+package it.uniroma3.siwbooks.authentication;
+
+import org.springframework.context.annotation.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+@Configuration
+public class SecurityBeansConfig {
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
+}
+
+
+--- src/main/java/it/uniroma3/siwbooks/constant/Nationality.java ---
+package it.uniroma3.siwbooks.constant;
+
+public enum Nationality {
+    ITALY,
+    UK,
+    USA, 
+    FRANCE, 
+    GERMANY, 
+    JAPAN
+}
+
+
+
+--- src/main/java/it/uniroma3/siwbooks/controller/BookController.java ---
+package it.uniroma3.siwbooks.controller;
+
+import java.security.Principal;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import it.uniroma3.siwbooks.model.*;
+import it.uniroma3.siwbooks.service.*;
+
+@Controller
+@RequestMapping("/books")
+public class BookController {
+
+    private final BookService bookService;
+    private final CredentialsService credentialsService;
+    private final ReviewService reviewService;
+
+    @Autowired
+    public BookController(BookService bs,
+                          CredentialsService cs,
+                          ReviewService rs) {
+        this.bookService        = bs;
+        this.credentialsService = cs;
+        this.reviewService      = rs;
+    }
+
+    @GetMapping("/{id}")
+    public String viewBook(@PathVariable Long id,
+                           Model model,
+                           Principal principal) {
+        return bookService.findById(id)
+            .map(book -> {
+                model.addAttribute("book", book);
+                model.addAttribute("newReview", new Review());
+
+                if (principal != null) {
+                    Credentials cred = credentialsService.findByUsername(principal.getName())
+                                                         .orElseThrow();
+                    Long currentUserId = cred.getUser().getId();
+                    model.addAttribute("currentUserId", currentUserId);
+
+                    boolean hasReviewed = reviewService
+                        .existsByUserAndBook(cred.getUser(), book);
+                    model.addAttribute("canReview", !hasReviewed);
+                } else {
+                    model.addAttribute("canReview", false);
+                }
+
+                return "book";
+            })
+            .orElse("error");
+    }
+}
+
+
+--- src/main/java/it/uniroma3/siwbooks/controller/LoginController.java ---
+package it.uniroma3.siwbooks.controller;
+
+import java.util.Optional;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class LoginController {
+
+    @GetMapping("/login")
+    public String login(@RequestParam Optional<String> error, Model model) {
+        model.addAttribute("loginError", error.isPresent());
+        return "login";
+    }
+}
+
+
+
+--- src/main/java/it/uniroma3/siwbooks/controller/RegisterController.java ---
+package it.uniroma3.siwbooks.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
+
+import it.uniroma3.siwbooks.model.Credentials;
+import it.uniroma3.siwbooks.model.User;
+import it.uniroma3.siwbooks.service.CredentialsService;
+
+@Controller
+public class RegisterController {
+
+    @Autowired
+    private CredentialsService credentialsService;
+
+    /**
+     * Mostra la pagina di registrazione.
+     */
+    @GetMapping("/register")
+    public String showRegistrationForm(Model model) {
+        Credentials creds = new Credentials();
+        creds.setUser(new User());       // ← qui!
+        model.addAttribute("credentials", creds);
+        return "register";
+    }
+
+
+    /**
+     * Processa il form di registrazione.
+    */
+    @PostMapping("/register")
+    public String registerUser(
+        @Valid @ModelAttribute("credentials") Credentials credentials,
+        BindingResult binding
+    ) {
+        if (credentialsService.existsByUsername(credentials.getUsername())) {
+            binding.rejectValue("username","error.credentials","Username già esistente");
+        }
+        if (binding.hasErrors()) return "register";
+
+        // role e user già collegati
+        credentials.setRole(Credentials.DEFAULT_ROLE);
+        credentialsService.save(credentials);
+        return "redirect:/login?registered";
+    }
+
+}
+
+
+
+--- src/main/java/it/uniroma3/siwbooks/controller/ReviewController.java ---
+package it.uniroma3.siwbooks.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import it.uniroma3.siwbooks.model.Review;
+import it.uniroma3.siwbooks.service.ReviewService;
+
+@Controller
+@RequestMapping("/books/{bookId}/reviews")
+public class ReviewController {
+
+    @Autowired
+    private ReviewService reviewService;
+
+    /** Aggiunge una recensione, cattura IllegalStateException e passa il messaggio via flash */
+    @PostMapping
+    public String addReview(@PathVariable Long bookId,
+                            @RequestParam Long userId,
+                            @ModelAttribute("newReview") Review newReview,
+                            RedirectAttributes redirectAttrs) {
+        try {
+            reviewService.addReview(bookId, userId, newReview);
+        } catch (IllegalStateException e) {
+            // messaggio “Hai già recensito questo libro”
+            redirectAttrs.addFlashAttribute("reviewError", e.getMessage());
+        }
+        return "redirect:/books/" + bookId;
+    }
+
+    /** Elimina una recensione */
+    @PostMapping("/{reviewId}/delete")
+    public String deleteReview(@PathVariable Long bookId,
+                               @PathVariable Long reviewId,
+                               @RequestParam Long userId,
+                               RedirectAttributes redirectAttrs) {
+        try {
+            reviewService.deleteReview(reviewId, userId);
+        } catch (Exception e) {
+            redirectAttrs.addFlashAttribute("reviewError", e.getMessage());
+        }
+        return "redirect:/books/" + bookId;
+    }
+}
+
+
+--- src/main/java/it/uniroma3/siwbooks/model/Author.java ---
+
+package it.uniroma3.siwbooks.model;
+
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
+import it.uniroma3.siwbooks.constant.Nationality;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+
+
+
+@Entity
+public class Author {
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    private String name;
+    private String surname;
+    private LocalDate birthDate;
+    private LocalDate deathDate;
+
+    @Enumerated(EnumType.STRING)
+    private Nationality nationality;
+
+    @ManyToMany(mappedBy = "authors")
+    private Set<Book> books = new HashSet<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public LocalDate getDeathDate() {
+        return deathDate;
+    }
+
+    public void setDeathDate(LocalDate deathDate) {
+        this.deathDate = deathDate;
+    }
+
+    public Nationality getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(Nationality nationality) {
+        this.nationality = nationality;
+    }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Author author = (Author) o;
+
+        return id != null ? id.equals(author.id) : author.id == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
+}
+
+
+--- src/main/java/it/uniroma3/siwbooks/model/Book.java ---
+package it.uniroma3.siwbooks.model;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+
+@Entity
+public class Book {
+
+    @Id 
+    @GeneratedValue
+    private Long id;
+
+    private String title;
+    private Integer publicationYear;
+
+    /* --- relazioni ---------------------------------------------------- */
+
+    @ManyToMany
+    private Set<Author> authors = new HashSet<>();
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ImageEntity> images = new HashSet<>();
+
+    @OneToMany(
+      mappedBy = "book",
+      cascade = CascadeType.ALL,
+      orphanRemoval = true
+    )
+    private List<Review> reviews = new ArrayList<>();
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Integer getPublicationYear() {
+        return publicationYear;
+    }
+
+    public void setPublicationYear(Integer publicationYear) {
+        this.publicationYear = publicationYear;
+    }
+
+    public Set<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(Set<Author> authors) {
+        this.authors = authors;
+    }
+
+    public Set<ImageEntity> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<ImageEntity> images) {
+        this.images = images;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Book)) return false;
+        Book book = (Book) o;
+        return id != null && id.equals(book.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 31 + (id == null ? 0 : id.hashCode());
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+}
+
+--- src/main/java/it/uniroma3/siwbooks/model/Credentials.java ---
+package it.uniroma3.siwbooks.model;
+
+import java.util.Objects;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotEmpty;
+
+@Entity
+public class Credentials {
+
+    public static final String DEFAULT_ROLE = "DEFAULT";
+    public static final String ADMIN_ROLE   = "ADMIN";
+
+    @Id @GeneratedValue 
+    private Long id;
+
+    @NotEmpty 
+    private String username;
+    
+    @NotEmpty 
+    private String password;
+
+    @NotEmpty 
+    private String role = DEFAULT_ROLE;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private User user;
+	
+	public String getUsername() {
+		return username;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public String getRole() {
+		return role;
+	}
+	
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(username);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Credentials other = (Credentials) obj;
+		return Objects.equals(username, other.username);
+	}
+
+	
+}
+
+
+--- src/main/java/it/uniroma3/siwbooks/model/ImageEntity.java ---
+package it.uniroma3.siwbooks.model;
+
+import java.util.Objects;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
+
+@Entity
+public class ImageEntity {
+
+    public static final String PATH = "/images/";   // prefisso URL
+
+    @Id @GeneratedValue
+    private Long id;
+
+    @NotNull
+    private String name;            // es. "/images/holmes.jpg"
+
+    /* relazione inversa verso Book */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_id")
+    private Book book;
+    
+    @Autowired
+    protected ImageEntity() { }                 // JPA
+
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 13 * hash + Objects.hashCode(this.id);
+        hash = 13 * hash + Objects.hashCode(this.name);
+        hash = 13 * hash + Objects.hashCode(this.book);
+        return hash;
+    }
+
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public Book getBook() {
+        return book;
+    }
+    public void setBook(Book book) {
+        this.book = book;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ImageEntity other = (ImageEntity) obj;
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return Objects.equals(this.book, other.book);
+    }
+
+}
+
+
+
+--- src/main/java/it/uniroma3/siwbooks/model/Review.java ---
+package it.uniroma3.siwbooks.model;
+import java.util.Objects;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
+@Entity
+public class Review {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @NotEmpty
+    @NotNull
+    private String title;
+
+    @Min(1) @Max(5)
+    private int mark; 
+
+    @NotEmpty
+    @NotNull
+    @Column(length=2000)
+    private String text;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Book book;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getMark() {
+        return mark;
+    }
+
+    public void setMark(int mark) {
+        this.mark = mark;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 41 * hash + Objects.hashCode(this.id);
+        hash = 41 * hash + Objects.hashCode(this.title);
+        hash = 41 * hash + this.mark;
+        hash = 41 * hash + Objects.hashCode(this.text);
+        hash = 41 * hash + Objects.hashCode(this.user);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Review other = (Review) obj;
+        if (this.mark != other.mark) {
+            return false;
+        }
+        if (!Objects.equals(this.title, other.title)) {
+            return false;
+        }
+        if (!Objects.equals(this.text, other.text)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return Objects.equals(this.user, other.user);
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+}
+
+--- src/main/java/it/uniroma3/siwbooks/model/User.java ---
+package it.uniroma3.siwbooks.model;
+
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
+@Entity
+@Table(name = "users")
+@SequenceGenerator(
+  name = "users_seq_gen",      // un nome a tua scelta
+  sequenceName = "users_seq",  // la sequenza che hai creato in import.sql
+  allocationSize = 50          // deve corrispondere all'INCREMENT BY di users_seq
+)
+public class User {
+
+    @Id
+    @GeneratedValue(
+      strategy = GenerationType.SEQUENCE,
+      generator = "users_seq_gen"
+    )
+    private Long id;
+
+    @NotNull @NotEmpty
+    private String nome;
+
+    @NotNull @NotEmpty
+    private String cognome;
+
+    @NotNull @NotEmpty
+    private String email;
+
+    @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+    private List<Review> recensioni;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCognome() {
+        return cognome;
+    }
+
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public List<Review> getRecensioni() {
+        return recensioni;
+    }
+
+    public void setRecensioni(List<Review> recensioni) {
+        this.recensioni = recensioni;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id != null && id.equals(user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
+}
+
+
+--- src/main/java/it/uniroma3/siwbooks/repository/BookRepository.java ---
+package it.uniroma3.siwbooks.repository;
+
+import it.uniroma3.siwbooks.model.Book;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface BookRepository extends JpaRepository<Book, Long> {
+}
+
+
+--- src/main/java/it/uniroma3/siwbooks/repository/CredentialsRepository.java ---
+package it.uniroma3.siwbooks.repository;
+
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import it.uniroma3.siwbooks.model.Credentials;
+import it.uniroma3.siwbooks.model.User;
+
+// CredentialsRepository.java
+public interface CredentialsRepository extends JpaRepository<Credentials, Long> {
+
+    Optional<Credentials> findByUsername(String username);
+    boolean existsByUsername(String username);
+}
+
+
+
+
+--- src/main/java/it/uniroma3/siwbooks/repository/ImageEntityRepository.java ---
+
+package it.uniroma3.siwbooks.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import it.uniroma3.siwbooks.model.ImageEntity;
+
+public interface ImageEntityRepository extends JpaRepository<ImageEntity, Long> { }
+
+
+--- src/main/java/it/uniroma3/siwbooks/repository/ReviewRepository.java ---
+package it.uniroma3.siwbooks.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import it.uniroma3.siwbooks.model.*;
+import java.util.Optional;
+
+public interface ReviewRepository extends JpaRepository<Review, Long> {
+  boolean existsByUserAndBook(User user, Book book);
+  Optional<Review> findByUserAndBook(User user, Book book);
+}
+
+
+--- src/main/java/it/uniroma3/siwbooks/repository/UserRepository.java ---
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+package it.uniroma3.siwbooks.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import it.uniroma3.siwbooks.model.User;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+
+}
+
+
+--- src/main/java/it/uniroma3/siwbooks/service/BookService.java ---
+package it.uniroma3.siwbooks.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import it.uniroma3.siwbooks.model.Book;
+import it.uniroma3.siwbooks.repository.BookRepository;
+
+@Service
+public class BookService {
+    @Autowired
+    private BookRepository repo;
+
+    public List<Book> findAll() {
+        return repo.findAll();
+    }
+
+    public Optional<Book> findById(Long id) {
+        return repo.findById(id);
+    }
+}
+
+
+
+--- src/main/java/it/uniroma3/siwbooks/service/CredentialsService.java ---
+// src/main/java/it/uniroma3/siwbooks/service/CredentialsService.java
+package it.uniroma3.siwbooks.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import it.uniroma3.siwbooks.model.Credentials;
+import it.uniroma3.siwbooks.repository.CredentialsRepository;
+
+@Service
+public class CredentialsService implements UserDetailsService {
+
+    public static final String ADMIN_ROLE   = Credentials.ADMIN_ROLE;
+    public static final String DEFAULT_ROLE = Credentials.DEFAULT_ROLE;
+
+    @Autowired
+    private CredentialsRepository repo;
+
+    @Autowired
+    private PasswordEncoder encoder;
+
+    /** Per recuperare l’utente in BookController */
+    public Optional<Credentials> findByUsername(String username) {
+        return repo.findByUsername(username);
+    }
+
+    @Transactional
+    public Credentials save(Credentials c) {
+        c.setPassword(encoder.encode(c.getPassword()));
+        return repo.save(c);
+    }
+
+    public boolean existsByUsername(String u) {
+        return repo.existsByUsername(u);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public UserDetails loadUserByUsername(String username)
+            throws UsernameNotFoundException {
+        Credentials c = repo.findByUsername(username)
+            .orElseThrow(() -> new UsernameNotFoundException(username));
+        return User.withUsername(c.getUsername())
+                   .password(c.getPassword())
+                   .roles(c.getRole())
+                   .build();
+    }
+}
+
+
+--- src/main/java/it/uniroma3/siwbooks/service/ImageEntityService.java ---
+package it.uniroma3.siwbooks.service;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import it.uniroma3.siwbooks.model.ImageEntity;
+import it.uniroma3.siwbooks.repository.ImageEntityRepository;
+import jakarta.transaction.Transactional;
+
+import static it.uniroma3.siwbooks.model.ImageEntity.PATH;
+
+@Service
+public class ImageEntityService {
+    
+	@Autowired
+    private ImageEntityRepository imageEntityRepository;
+	
+    @Value("${upload.dir}")
+    private String uploadDir;
+
+    public ImageEntity getImage(Long id) {
+        return imageEntityRepository.findById(id).orElse(null);
+    }
+}
+
+
+--- src/main/java/it/uniroma3/siwbooks/service/ReviewService.java ---
+package it.uniroma3.siwbooks.service;
+
+import java.util.NoSuchElementException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import it.uniroma3.siwbooks.model.*;
+import it.uniroma3.siwbooks.repository.*;
+
+@Service
+public class ReviewService {
+
+    @Autowired
+    private ReviewRepository reviewRepo;
+
+    @Autowired
+    private BookRepository bookRepo;
+
+    @Autowired
+    private UserRepository userRepo;
+
+    /** UC-03: aggiungi recensione */
+    @Transactional
+    public void addReview(Long bookId, Long userId, Review review) {
+        Book book = bookRepo.findById(bookId)
+            .orElseThrow(() -> new NoSuchElementException("Book not found"));
+        User user = userRepo.findById(userId)
+            .orElseThrow(() -> new NoSuchElementException("User not found"));
+
+        if (existsByUserAndBook(user, book)) {
+            throw new IllegalStateException("Hai già recensito questo libro");
+        }
+
+        review.setBook(book);
+        review.setUser(user);
+        reviewRepo.save(review);
+    }
+
+    public boolean existsByUserAndBook(User u, Book b) {
+        return reviewRepo.existsByUserAndBook(u, b);
+    }
+
+    /** UC-04: elimina recensione */
+    @Transactional
+    public void deleteReview(Long reviewId, Long userId) {
+        Review rev = reviewRepo.findById(reviewId)
+                      .orElseThrow(() -> new NoSuchElementException("Review not found"));
+        if (!rev.getUser().getId().equals(userId)) {
+            throw new SecurityException("Operazione non consentita");
+        }
+        reviewRepo.delete(rev);
+    }
+}
+
+
+--- src/main/resources/application.properties ---
+#==================================
+# = Application
+#==================================
+spring.application.name=siwbooks
+
+#==================================
+# = Datasource
+#==================================
+spring.jpa.database=POSTGRESQL
+spring.jpa.show-sql=true
+logging.level.org.hibernate.SQL=debug
+logging.level.org.hibernate.type.descriptor.sql=trace
+
+# ricrea lo schema a ogni avvio in dev
+spring.jpa.hibernate.ddl-auto=create
+
+# esegue import.sql sempre
+spring.sql.init.mode=ALWAYS
+
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.datasource.url=jdbc:postgresql://localhost:5432/siwbooks
+spring.datasource.username=postgres
+spring.datasource.password=postgres
+
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+
+#==================================
+# = Web server
+#==================================
+server.port=8080
+server.error.whitelabel.enabled=false
+server.error.include-stacktrace=always
+
+#==================================
+# = Thymeleaf
+#==================================
+spring.thymeleaf.enabled=true
+spring.thymeleaf.check-template-location=true
+spring.thymeleaf.prefix=classpath:/templates/
+spring.thymeleaf.suffix=.html
+spring.thymeleaf.servlet.content-type=text/html
+spring.thymeleaf.cache=false
+spring.thymeleaf.encoding=UTF-8
+
+spring.web.resources.static-locations=classpath:/static/
+
+#==================================
+# = Messages
+#==================================
+spring.messages.basename=messages/messages
+spring.messages.encoding=UTF-8
+
+#==================================
+# = Formattazione date/ora
+#==================================
+spring.mvc.format.date=dd/MM/yyyy
+spring.mvc.format.date-time=dd/MM/yyyy HH:mm
+
+#==================================
+# = Upload di file (immagini)
+#==================================
+spring.servlet.multipart.max-file-size=20MB
+spring.servlet.multipart.max-request-size=20MB
+upload.dir=./src/main/resources/static/images
+
+#==================================
+# = Sicurezza
+#==================================
+# eventuali proprietà di CORS o personalizzazioni Security vanno aggiunte qui
+
+
+--- src/main/resources/import.sql ---
+-- LIBRI
+INSERT INTO book (id, title, publication_year) VALUES (1, 'Sword Art Online – Aincrad 1', 2009);
+INSERT INTO book (id, title, publication_year) VALUES (2, 'Tutto Sherlock Holmes', 2010);
+INSERT INTO book (id, title, publication_year) VALUES (3, 'Sword Art Online – Aincrad 2', 2009);
+
+-- AUTORI
+INSERT INTO author (id, name, surname, birth_date, nationality) VALUES (1, 'Reki', 'Kawahara', '1974-08-17', 'JAPAN');
+INSERT INTO author (id, name, surname, birth_date, nationality) VALUES (2, 'Arthur', 'Conan Doyle', '1859-05-22', 'UK');
+
+-- RELAZIONE LIBRI-AUTORI
+INSERT INTO book_authors (books_id, authors_id) VALUES (1, 1);
+INSERT INTO book_authors (books_id, authors_id) VALUES (3, 1);
+INSERT INTO book_authors (books_id, authors_id) VALUES (2, 2);
+
+-- IMMAGINI
+INSERT INTO image_entity (id, name, book_id) VALUES (1, '/images/Sword_Art_Online_Aincrad_1.jpg', 1);
+INSERT INTO image_entity (id, name, book_id) VALUES (2, '/images/Sword_Art_Online_Aincrad_1_1.jpg', 1);
+INSERT INTO image_entity (id, name, book_id) VALUES (3, '/images/Sword_Art_Online_Aincrad_2.jpg', 3);
+INSERT INTO image_entity (id, name, book_id) VALUES (4, '/images/Tutto_Sherlock_Holmes.jpg', 2);
+INSERT INTO image_entity (id, name)           VALUES (5, '/images/Reki_Kawahara.jpg');
+INSERT INTO image_entity (id, name)           VALUES (6, '/images/Arthur_Conan_Doyle.jpg');
+
+-- UTENTI
+INSERT INTO users (id, nome, cognome, email) VALUES (1, 'Alice', 'Bianchi', 'alice@example.com');
+INSERT INTO users (id, nome, cognome, email) VALUES (2, 'Mario', 'Rossi', 'mario.rossi@uniroma3.it');
+
+-- RECENSIONI
+INSERT INTO review (id, title, text, mark, book_id, user_id) VALUES (1, 'Bellissimo',          'Mi ha catturato fin dalla prima pagina.',        5, 1, 1);
+INSERT INTO review (id, title, text, mark, book_id, user_id) VALUES (2, 'Molto interessante', 'Stile scorrevole, trama avvincente.',            4, 1, 2);
+INSERT INTO review (id, title, text, mark, book_id, user_id) VALUES (3, 'Classico imperdibile','Holmes è sempre Holmes!',                       5, 2, 1);
+
+-- (Eventuali CREDENTIALS da preinserire, se ti servono)
+-- INSERT INTO credentials (id, username, password, role, user_id) VALUES (1, 'alice', '$2a$10$…', 'DEFAULT', 1);
+
+-- RIPRISTINO DELLE SEQUENZE PER EVITARE DUPLICATI
+SELECT setval('author_seq',         (SELECT MAX(id) FROM author));
+SELECT setval('book_seq',           (SELECT MAX(id) FROM book));
+SELECT setval('image_entity_seq',   (SELECT MAX(id) FROM image_entity));
+SELECT setval('users_seq',          (SELECT MAX(id) FROM users));
+SELECT setval('review_seq',         (SELECT MAX(id) FROM review));
+-- SELECT setval('credentials_seq', (SELECT MAX(id) FROM credentials));
+
+
+--- src/main/resources/static/css/book.css ---
+/* book-detail.css */
+
+/* Reset base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: sans-serif;
+  background: #fafafa;
+  color: #333;
+  line-height: 1.6;
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Titolo pagina */
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+/* Paragrafo info */
+p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Sezione Autori */
+h2 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  color: #444;
+}
+
+ul {
+  list-style: disc inside;
+  margin-bottom: 1.5rem;
+}
+
+ul li {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+/* Sezione Immagini */
+.images-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.images-container img {
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  width: 200px;
+  height: auto;
+  transition: transform .2s;
+}
+
+.images-container img:hover {
+  transform: scale(1.03);
+}
+
+/* Messaggio no immagini */
+.no-images {
+  font-style: italic;
+  color: #666;
+}
+
+
+--- src/main/resources/static/css/books.css ---
+/* books.css */
+
+/* Global reset / base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: sans-serif;
+  line-height: 1.5;
+  background: #f5f5f5;
+  color: #333;
+  padding: 1rem;
+}
+
+/* Page title */
+h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  color: #444;
+}
+
+/* Grid container for book cards */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Individual book card */
+.book-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Cover image wrapper */
+.book-cover-wrapper {
+  width: 126px;
+  height: 178px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.book-cover-wrapper img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Title */
+.book-title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  min-height: 2.5em; /* two lines */
+}
+
+/* Details link */
+.view-details-link {
+  margin-top: auto;
+  padding: 0.4rem 0.8rem;
+  background: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: background .2s;
+}
+
+.view-details-link:hover {
+  background: #0056b3;
+}
+
+
+--- src/main/resources/static/images/Arthur_Conan_Doyle.jpg ---
+Error reading file src/main/resources/static/images/Arthur_Conan_Doyle.jpg: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
+
+--- src/main/resources/static/images/Reki_Kawahara.jpg ---
+Error reading file src/main/resources/static/images/Reki_Kawahara.jpg: 'utf-8' codec can't decode byte 0xae in position 4: invalid start byte
+
+--- src/main/resources/static/images/Sword_Art_Online_Aincrad_1.jpg ---
+Error reading file src/main/resources/static/images/Sword_Art_Online_Aincrad_1.jpg: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
+
+--- src/main/resources/static/images/Sword_Art_Online_Aincrad_1_1.jpg ---
+Error reading file src/main/resources/static/images/Sword_Art_Online_Aincrad_1_1.jpg: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
+
+--- src/main/resources/static/images/Sword_Art_Online_Aincrad_2.jpg ---
+Error reading file src/main/resources/static/images/Sword_Art_Online_Aincrad_2.jpg: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
+
+--- src/main/resources/static/images/Tutto_Sherlock_Holmes.jpg ---
+Error reading file src/main/resources/static/images/Tutto_Sherlock_Holmes.jpg: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
+
+--- src/main/resources/templates/book.html ---
+<!DOCTYPE html>
+<html lang="it"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${book.title}">Dettaglio</title>
+  <link rel="stylesheet" th:href="@{/css/book.css}">
+</head>
+<body>
+  <!-- Dettagli libro, autori, immagini... -->
+
+  <h2>Recensioni</h2>
+  <ul>
+    <li th:each="rev : ${book.reviews}">
+      <!-- mostra titolo, testo, voto, autore... -->
+      <button th:if="${currentUserId} == ${rev.user.id}"
+              th:onclick="'location.href=\'/books/'+${book.id}+'/reviews/edit/'+${rev.id}+'\';'">
+        Modifica
+      </button>
+      <form th:if="${currentUserId} == ${rev.user.id}"
+            th:action="@{/books/{bookId}/reviews/{revId}/delete(
+                           bookId=${book.id},
+                           revId=${rev.id})}"
+            method="post" style="display:inline">
+        <input type="hidden" name="userId" th:value="${currentUserId}" />
+        <button type="submit">Elimina</button>
+      </form>
+    </li>
+  </ul>
+
+  <div sec:authorize="isAuthenticated()">
+    <div th:if="${canReview}">
+      <h2>Aggiungi la tua recensione</h2>
+      <form th:action="@{/books/{bookId}/reviews(bookId=${book.id})}"
+            th:object="${newReview}" method="post">
+        <input type="hidden" name="userId" th:value="${currentUserId}" />
+        <!-- campi title, text, mark -->
+        <button type="submit">Invia recensione</button>
+      </form>
+    </div>
+    <div th:unless="${canReview}">
+      <p>Hai già recensito questo libro.</p>
+    </div>
+  </div>
+  <div sec:authorize="!isAuthenticated()">
+    <p><a th:href="@{/login}">Accedi</a> per scrivere una recensione.</p>
+  </div>
+</body>
+</html>
+
+
+--- src/main/resources/templates/books.html ---
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Catalogo libri</title>
+  <link rel="stylesheet" th:href="@{/css/books.css}">
+</head>
+<body>
+
+<h1>Catalogo libri</h1>
+
+<div th:if="${books.empty}">
+  Nessun libro disponibile
+</div>
+
+<div class="books-grid" th:unless="${books.empty}">
+  <div class="book-card" th:each="book : ${books}">
+    <div class="book-cover-wrapper">
+      <!-- prima immagine se presente -->
+      <img th:if="${book.images != null and !book.images.empty}"
+           th:src="${book.images.iterator().next().name}"
+           width="126" alt="Copertina"/>
+
+      <!-- placeholder se nessuna immagine -->
+      <img th:unless="${book.images != null and !book.images.empty}"
+           src="https://placehold.co/126x178?text=Nessuna+immagine"
+           width="126" alt="Nessuna immagine disponibile"/>
+    </div>
+
+    <div class="book-title" th:text="${book.title}">Titolo libro</div>
+
+    <a class="view-details-link"
+       th:href="@{'/books/' + ${book.id}}">
+       Dettagli
+    </a>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+--- src/main/resources/templates/error.html ---
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Errore - Siwbooks</title>
+    <style>
+      body { font-family: sans-serif; margin: 2em; }
+      h1 { color: #c00; }
+      .details p { margin: 0.5em 0; }
+    </style>
+</head>
+<body>
+    <h1>Si è verificato un errore</h1>
+    <div class="details">
+      <p th:text="'Status: ' + ${status}">Status: ?</p>
+      <p th:text="'Errore: ' + ${error}">Errore: ?</p>
+      <p th:text="'Messaggio: ' + ${message}">Messaggio: ?</p>
+      <p th:text="'Path: ' + ${path}">Path: ?</p>
+      <p th:text="'Timestamp: ' + ${timestamp}">Timestamp: ?</p>
+    </div>
+    <p><a th:href="@{/}">← Torna alla pagina principale</a></p>
+</body>
+</html>
+
+
+--- src/main/resources/templates/login.html ---
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Login</title></head>
+<body>
+  <h1>Accedi</h1>
+  <form th:action="@{/login}" method="post">
+    <div><label>Username: <input name="username"/></label></div>
+    <div><label>Password: <input type="password" name="pwd"/></label></div>
+    <button type="submit">Login</button>
+    <div th:if="${param.error}">Credenziali non valide</div>
+  </form>
+</body>
+</html>
+
+
+--- src/main/resources/templates/register.html ---
+<form th:action="@{/register}" th:object="${credentials}" method="post">
+  <div>
+    <label>Username: <input th:field="*{username}"/></label>
+    <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+  </div>
+  <div>
+    <label>Password: <input type="password" th:field="*{password}"/></label>
+    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+  </div>
+  <div>
+    <label>Nome: <input th:field="*{user.nome}"/></label>
+  </div>
+  <div>
+    <label>Cognome: <input th:field="*{user.cognome}"/></label>
+  </div>
+  <div>
+    <label>Email: <input th:field="*{user.email}"/></label>
+  </div>
+  <button type="submit">Registrati</button>
+</form>
+
+
+--- src/main/treepro.txt ---
+Error reading file src/main/treepro.txt: [Errno 2] No such file or directory: './src/main/treepro.txt'
+
+--- src/test/java/it/uniroma3/siwbooks/SiwbooksApplicationTests.java ---
+package it.uniroma3.siwbooks;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class SiwbooksApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
