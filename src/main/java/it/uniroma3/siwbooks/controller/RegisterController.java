@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import it.uniroma3.siwbooks.model.Credentials;
 import it.uniroma3.siwbooks.model.User;
 import it.uniroma3.siwbooks.service.CredentialsService;
+import jakarta.validation.Valid;
 
 @Controller
 public class RegisterController {
@@ -21,11 +23,15 @@ public class RegisterController {
      * Mostra la pagina di registrazione.
      */
     @GetMapping("/register")
-	public String showRegister(Model model) {
-		model.addAttribute("user", new User());
-		model.addAttribute("credentials", new Credentials());
-		return "register";
-	}
+    public String showRegister(Model model) {
+        // crea Credentials E lo “collega” a un nuovo User
+        Credentials credentials = new Credentials();
+        credentials.setUser(new User());     // ← inizializza il user interno
+
+        model.addAttribute("credentials", credentials);
+        return "register";
+    }
+
 
 
     /**

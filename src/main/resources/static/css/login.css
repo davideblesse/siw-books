@@ -1,0 +1,104 @@
+/* login.css */
+
+/* 1. Layout di base ---------------------------------------------------- */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f7f7f7;           /* grigio very-light */
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* contenitore centrale (tutto ciò che NON è header/footer) */
+.login-wrapper {
+  flex: 1;                       /* occupa spazio restante */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+/* 2. Box del form ------------------------------------------------------ */
+.login-box {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  padding: 2.5rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* titolo */
+.login-box h1 {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #333;
+}
+
+/* 3. Campi ------------------------------------------------------------- */
+.login-box label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+.login-box input:focus {
+  outline: none;
+  border-color: #0066cc;
+}
+
+/* spazio fra i gruppi */
+.login-box .form-group {
+  margin-bottom: 1.1rem;
+}
+
+/* 4. Pulsante ---------------------------------------------------------- */
+.login-box button[type="submit"] {
+  width: 100%;
+  padding: 0.65rem 0;
+  border: none;
+  border-radius: 4px;
+  background: #0066cc;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.login-box button[type="submit"]:hover {
+  background: #0057ad;
+}
+
+/* 5. Messaggi di errore / link ---------------------------------------- */
+.login-box .error-msg {
+  color: #c0392b;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.login-box .register-prompt {
+  margin-top: 1.25rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.login-box .register-link {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.login-box .register-link:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,87 @@
+/* register.css */
+
+/* 1. Struttura generale ----------------------------------------------- */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f7f7f7;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.register-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+.register-box {
+  width: 100%;
+  max-width: 480px;
+  background: #ffffff;
+  padding: 2.5rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* 2. Titolo ------------------------------------------------------------ */
+.register-box h1 {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #333;
+}
+
+/* 3. Campi e validazione ---------------------------------------------- */
+.register-box label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.register-box input {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+.register-box input:focus {
+  outline: none;
+  border-color: #0066cc;
+}
+
+.register-box .form-group {
+  margin-bottom: 1.1rem;
+}
+
+/* messaggi di errore Thymeleaf */
+.register-box .field-error,
+.register-box .global-error {
+  color: #c0392b;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+/* 4. Pulsante ---------------------------------------------------------- */
+.register-box button[type="submit"] {
+  width: 100%;
+  padding: 0.65rem 0;
+  border: none;
+  border-radius: 4px;
+  background: #0066cc;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.register-box button[type="submit"]:hover {
+  background: #0057ad;
+}
