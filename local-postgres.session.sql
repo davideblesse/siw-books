@@ -1,1 +1,1 @@
-select * from users;
+select * from image_entity;

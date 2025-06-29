@@ -123,9 +123,18 @@
           </form>
         </div>
 
-        <div th:if="${hasReview}" class="already-reviewed">
-          Hai già commentato!
-        </div>
+  <div th:if="${hasReview}" class="already-reviewed">
+    Hai già inserito una recensione.
+    <form th:if="${hasReview} and ${myReview != null}"
+    th:action="@{'/user/review/' + ${myReview.id} + '/delete'}"
+          method="post" class="delete-review-form">
+      <input type="hidden"
+            th:name="${_csrf.parameterName}"
+            th:value="${_csrf.token}"/>
+      <button type="submit" class="btn-delete-review">Rimuovila</button>
+    </form>
+  </div>
+
 
         </div>
     </main>

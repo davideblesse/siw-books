@@ -92,4 +92,24 @@ public class ReviewController {
         reviewService.deleteById(id);
         return "redirect:/admin/books/" + book.getId();
     }
+
+    /* ---------- DELETE lato USER --------------------------------------- */
+    @PostMapping("/user/review/{id}/delete")
+    public String deleteUserReview(@PathVariable Long id) {
+
+        User   current = userService.getCurrentUser();
+        Review review  = reviewService.findById(id);
+
+        // se non loggato, o la review non esiste,
+        // o non è dell’utente corrente → redirect login
+        if (current == null || review == null || !review.getUser().equals(current)) {
+            return "redirect:/login";
+        }
+
+        Long bookId = review.getBook().getId();
+        reviewService.deleteById(id);
+
+        return "redirect:/user/books/" + bookId;
+    }
+
 }

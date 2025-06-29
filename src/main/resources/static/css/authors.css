@@ -73,8 +73,6 @@
 .view-details-link:hover {
   background-color: #555;
 }
-
-
 /* DELETE */
 
 .card-actions {
@@ -99,4 +97,94 @@
 }
 .delete-button:hover {
   background-color: #e04848;
+}
+
+/* --- Pulsante Modifica --- */
+.edit-button {
+  display: inline-block;
+  padding: 0.45rem 1rem;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.85rem;
+  color: #fff;
+  background: #0066cc;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.edit-button:hover { background: #0057ad; }
+
+/* --- Card “+ Nuovo autore” --- */
+.create-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fafafa;
+  border: 2px dashed #ccc;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.create-link {
+  font-size: 1.8rem;
+  color: #999;
+  text-decoration: none;
+}
+.create-card:hover {
+  border-color: #999;
+}
+.create-card:hover .create-link {
+  color: #666;
+}
+
+/* contenitore orizzontale dei pulsanti */
+.card-actions {
+  display: flex;
+  justify-content: center; /* o flex-start se preferisci allineati a sinistra */
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* stile di base per tutti i bottoni/link */
+.card-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  font-family: 'Open Sans', sans-serif;
+  border-radius: 4px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+/* Dettagli: grigio-scuro su sfondo chiaro */
+.card-actions .action-details {
+  background: #f0f0f0;
+  color: #333;
+  border-color: #ccc;
+}
+.card-actions .action-details:hover {
+  background: #e0e0e0;
+}
+
+/* Modifica: blu */
+.card-actions .action-edit {
+  background: #0066cc;
+  color: #fff;
+  border-color: #0057ad;
+}
+.card-actions .action-edit:hover {
+  background: #0057ad;
+}
+
+/* Elimina: rosso */
+.card-actions .action-delete {
+  background: #ff5252;
+  color: #fff;
+  border-color: #e04848;
+}
+.card-actions .action-delete:hover {
+  background: #e04848;
 }

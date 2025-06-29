@@ -1,84 +1,92 @@
+<!-- templates/admin/admin_authors.html -->
 <!DOCTYPE html>
 <html lang="it" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" th:href="@{/css/authors.css}" />
-    <link rel="stylesheet" th:href="@{/css/layout.css}" />
-  </head>
-  <body>
-    <header class="header">
-      <nav class="navbar">
-        <div class="navbar-content">
-          <div class="navbar-links-group">
-            <h1 class="navbar-Title">SiwBooks</h1>
-          </div>
-          <div class="navbar-links-group">
-            <a th:href="@{/}" class="navbar-link">Home</a>
-            <a th:href="@{/admin/books}" class="navbar-link">Libri</a>
-            <a th:href="@{/admin/authors}" class="navbar-link active">Autori</a>
-            <a th:href="@{'/admin/' + ${user.id}}" class="navbar-link"
-              >Profilo</a
-            >
-            <form th:action="@{/logout}" method="post">
-              <input
-                type="hidden"
-                th:name="${_csrf.parameterName}"
-                th:value="${_csrf.token}"
-              />
-              <button type="submit" class="navbar-link">Esci</button>
-            </form>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Autori</title>
+
+  <link rel="stylesheet" th:href="@{/css/layout.css}" />
+  <link rel="stylesheet" th:href="@{/css/authors.css}" />
+</head>
+<body>
+
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-content">
+      <div class="navbar-links-group">
+        <h1 class="navbar-Title">SiwBooks</h1>
+      </div>
+      <div class="navbar-links-group">
+        <a th:href="@{/}"               class="navbar-link">Home</a>
+        <a th:href="@{/admin/books}"    class="navbar-link">Libri</a>
+        <a th:href="@{/admin/authors}"  class="navbar-link active">Autori</a>
+        <a th:href="@{'/admin/' + ${user.id}}" class="navbar-link">Profilo</a>
+        <form th:action="@{/logout}" method="post">
+          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+          <button type="submit" class="navbar-link">Esci</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="main-content">
+
+  <div th:if="${authors.empty}" class="no-content">Nessun autore disponibile</div>
+
+  <div th:unless="${authors.empty}" class="authors-grid">
+    <!-- CARD AUTORE -->
+    <div th:each="author : ${authors}" class="author-card">
+      <img th:if="${author.photo != null}"
+           th:src="@{${author.photo.name}}"
+           th:alt="'Foto di ' + ${author.getFullName()}" />
+      <img th:unless="${author.photo != null}"
+           src="/images/placeholder.jpg"
+           alt="Nessuna immagine autore" />
+
+      <div class="author-info">
+        <h2 th:text="${author.getFullName()}">Full Name</h2>
+
+        <!-- Azioni -->
+        <div class="card-actions">
+          <a th:href="@{'/admin/authors/' + ${author.id}}"
+            class="btn action-details">
+            Dettagli
+          </a>
+          <a th:href="@{'/admin/authors/' + ${author.id} + '/edit'}"
+            class="btn action-edit">
+            Modifica
+          </a>
+          <form th:action="@{'/admin/authors/' + ${author.id}}"
+                method="post"
+                class="delete-form">
+            <input type="hidden"
+                  th:name="${_csrf.parameterName}"
+                  th:value="${_csrf.token}"/>
+            <button type="submit"
+                    class="btn action-delete">
+              Elimina
+            </button>
+          </form>
         </div>
-      </nav>
-    </header>
 
-    <main class="main-content">
-      <div th:if="${authors.empty}" class="no-content">
-        Nessun autore disponibile
       </div>
-      <div th:unless="${authors.empty}" class="authors-grid">
-        <div th:each="author : ${authors}" class="author-card">
-          <img
-            th:if="${author.photo == null}"
-            src="/images/placeholder.jpg"
-            alt="Nessuna immagine autore"
-          />
-          <img
-            th:if="${author.photo != null}"
-            th:src="${author.photo.name}"
-            alt="Immagine autore"
-          />
-          <div class="author-info">
-            <h2 th:text="${author.getFullName()}">Full Name</h2>
-            <a
-              th:href="@{'/admin/authors/' + ${author.id}}"
-              class="view-details-link"
-              >Dettagli</a
-            >
+    </div>
 
-            <form
-              th:action="@{'/admin/authors/' + ${author.id}}"
-              method="post"
-              class="delete-form"
-            >
-              <input
-                type="hidden"
-                th:name="${_csrf.parameterName}"
-                th:value="${_csrf.token}"
-              />
-              <button type="submit" class="delete-button">Elimina</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </main>
+    <!-- CARD “+ NUOVO AUTORE” -->
+    <div class="author-card create-card">
+      <a th:href="@{/admin/authors/new}" class="create-link">+ Nuovo autore</a>
+    </div>
+  </div>
 
-    <footer class="footer">
-      <div class="footer-content">
-        <p>Siwbooks - La tua libreria digitale</p>
-      </div>
-    </footer>
-  </body>
+</main>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>Siwbooks - La tua libreria digitale</p>
+  </div>
+</footer>
+
+</body>
 </html>

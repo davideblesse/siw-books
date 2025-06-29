@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import it.uniroma3.siwbooks.model.Book;
+import it.uniroma3.siwbooks.model.Review;
 import it.uniroma3.siwbooks.model.User;
 import it.uniroma3.siwbooks.service.BookService;
 import it.uniroma3.siwbooks.service.ReviewService;
@@ -64,6 +65,13 @@ public class BookController {
             return "redirect:/login";
         }
         boolean hasReview = reviewService.existsByUserAndBook(user, book);
+
+        Review myReviewEntity = null;
+        if (hasReview) {
+            myReviewEntity = reviewService.findByUserAndBook(user, book);
+        }
+
+        model.addAttribute("myReview", myReviewEntity);
         model.addAttribute("hasReview", hasReview);
         model.addAttribute("book", book);
         model.addAttribute("user", user);

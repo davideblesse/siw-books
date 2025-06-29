@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title th:text="${action=='create' ? 'Nuovo libro' : 'Modifica libro'}">Libro</title>
+
+  <link rel="stylesheet" th:href="@{/css/layout.css}" />
+  <link rel="stylesheet" th:href="@{/css/book_form.css}" />
+</head>
+<body>
+
+  <!-- NAVBAR ADMIN -->
+  <header class="header">
+    <nav class="navbar">
+      <div class="navbar-content">
+        <div class="navbar-links-group">
+          <h1 class="navbar-Title">SiwBooks</h1>
+        </div>
+        <div class="navbar-links-group">
+          <a th:href="@{/}"               class="navbar-link">Home</a>
+          <a th:href="@{/admin/books}"    class="navbar-link active">Libri</a>
+          <a th:href="@{/admin/authors}"  class="navbar-link">Autori</a>
+          <a th:href="@{'/admin/' + ${user.id}}" class="navbar-link">Profilo</a>
+
+          <form th:action="@{/logout}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <button type="submit" class="navbar-link">Esci</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- FORM -->
+<main class="main-content">
+  <div class="form-wrapper">
+    <h1 th:text="${action=='create' ? 'Inserisci nuovo autore' : 'Modifica autore'}">Autore</h1>
+
+    <form th:action="${action=='create'} ? @{'/admin/authors'} : @{/admin/authors/{id}/edit(id=${author.id})}"
+          th:object="${author}"
+          method="post"
+          enctype="multipart/form-data">
+
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+      <!-- Nome -->
+      <div class="form-group">
+        <label for="name">Nome</label>
+        <input id="name" type="text" th:field="*{name}" required />
+      </div>
+
+      <!-- Cognome -->
+      <div class="form-group">
+        <label for="surname">Cognome</label>
+        <input id="surname" type="text" th:field="*{surname}" required />
+      </div>
+
+      <!-- Data di nascita -->
+      <div class="form-group">
+        <label for="birth">Data di nascita</label>
+        <input id="birth" type="date" th:field="*{birthDate}" required />
+      </div>
+
+      <!-- Data di morte (opzionale) -->
+      <div class="form-group">
+        <label for="death">Data di morte (se applicabile)</label>
+        <input id="death" type="date" th:field="*{deathDate}" />
+      </div>
+
+      <!-- Nazionalità -->
+      <div class="form-group">
+        <label for="nation">Nazionalità</label>
+        <select id="nation" th:field="*{nationality}">
+          <option th:each="n : ${allNations}"
+                  th:value="${n}"
+                  th:text="${n}">Nation</option>
+        </select>
+      </div>
+
+      <!-- Foto -->
+      <div class="form-group">
+        <label for="photoFile">Foto autore</label>
+        <input id="photoFile" type="file" name="photoFile" accept="image/*" />
+      </div>
+
+      <!-- se in edit, mostra la foto corrente -->
+      <div class="form-group" th:if="${action=='edit' and author.photo != null}">
+        <p>Foto corrente:</p>
+        <img th:src="@{${author.photo.name}}" style="max-height:120px"/>
+      </div>
+
+      <!-- Bottoni -->
+      <div class="form-actions">
+        <button type="submit" th:text="${action=='create' ? 'Crea' : 'Aggiorna'}">Salva</button>
+        <a th:href="@{/admin/authors}">Annulla</a>
+      </div>
+    </form>
+  </div>
+</main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>Siwbooks - La tua libreria digitale</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,14 +1,14 @@
 -- IMMAGINI
-INSERT INTO image_entity (id, name) VALUES (1, '/images/Orgoglio_E_Pregiudizio_1.jpg');
-INSERT INTO image_entity (id, name) VALUES (2, '/images/Orgoglio_E_Pregiudizio_2.jpg');
-INSERT INTO image_entity (id, name) VALUES (3, '/images/Cent_Anni_1.jpg');
-INSERT INTO image_entity (id, name) VALUES (4, '/images/Cent_Anni_2.jpg');
-INSERT INTO image_entity (id, name) VALUES (5, '/images/Ragione_E_Sentimento_1.jpg');
-INSERT INTO image_entity (id, name) VALUES (6, '/images/Ragione_E_Sentimento_2.jpg');
-INSERT INTO image_entity (id, name) VALUES (7, '/images/Amore_Ai_Tempi_1.jpg');
-INSERT INTO image_entity (id, name) VALUES (8, '/images/Amore_Ai_Tempi_2.jpg');
-INSERT INTO image_entity (id, name) VALUES (9, '/images/Jane_Austen_coloured_version.jpg');
-INSERT INTO image_entity (id, name) VALUES (10, '/images/Gabriel_Garcia_Marquez.jpg');
+INSERT INTO image_entity (id, name) VALUES (1, 'Orgoglio_E_Pregiudizio_1.jpg');
+INSERT INTO image_entity (id, name) VALUES (2, 'Orgoglio_E_Pregiudizio_2.jpg');
+INSERT INTO image_entity (id, name) VALUES (3, 'Cent_Anni_1.jpg');
+INSERT INTO image_entity (id, name) VALUES (4, 'Cent_Anni_2.jpg');
+INSERT INTO image_entity (id, name) VALUES (5, 'Ragione_E_Sentimento_1.jpg');
+INSERT INTO image_entity (id, name) VALUES (6, 'Ragione_E_Sentimento_2.jpg');
+INSERT INTO image_entity (id, name) VALUES (7, 'Amore_Ai_Tempi_1.jpg');
+INSERT INTO image_entity (id, name) VALUES (8, 'Amore_Ai_Tempi_2.jpg');
+INSERT INTO image_entity (id, name) VALUES (9, 'Jane_Austen_coloured_version.jpg');
+INSERT INTO image_entity (id, name) VALUES (10, 'Gabriel_Garcia_Marquez.jpg');
 
 -- AUTORI
 INSERT INTO author (id, name, surname, birth_date, death_date, nationality, photo_id) VALUES (1, 'Jane', 'Austen', '1775-12-16', '1817-07-18', 'UK', 9);
