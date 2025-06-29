@@ -2,16 +2,24 @@
 package it.uniroma3.siwbooks.model;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import it.uniroma3.siwbooks.constant.Nationality;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.PastOrPresent;
 
 
 
@@ -21,16 +29,31 @@ public class Author {
     @GeneratedValue
     private Long id;
 
+    @NotEmpty
     private String name;
+
+    @NotEmpty
     private String surname;
+
+    @NotNull
+    @Past
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate birthDate;
+
+    @PastOrPresent
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate deathDate;
 
-    @Enumerated(EnumType.STRING)
+    @NotNull
+	@Enumerated(EnumType.STRING)
     private Nationality nationality;
 
-    @ManyToMany(mappedBy = "authors")
-    private Set<Book> books = new HashSet<>();
+
+    @ManyToMany(mappedBy = "authors", cascade = CascadeType.ALL)
+    private List<Book> books = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+	private ImageEntity photo;
 
     public Long getId() {
         return id;
@@ -80,11 +103,11 @@ public class Author {
         this.nationality = nationality;
     }
 
-    public Set<Book> getBooks() {
+    public List<Book> getBooks() {
         return books;
     }
 
-    public void setBooks(Set<Book> books) {
+    public void setBooks(List<Book> books) {
         this.books = books;
     }
 
@@ -101,5 +124,17 @@ public class Author {
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
+    }
+
+    public ImageEntity getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(ImageEntity photo) {
+        this.photo = photo;
+    }
+
+    public String getFullName() {
+        return this.name + " " + this.surname;
     }
 }

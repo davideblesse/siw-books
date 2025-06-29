@@ -9,21 +9,27 @@
   </head>
 
   <body>
-    <header class="header">
-      <nav class="navbar">
-        <div class="navbar-content">
-          <div class="navbar-links-group">
-            <h1 class="navbar-Title">SiwBooks</h1>
-          </div>
-          <div class="navbar-links-group">
-            <a th:href="@{/}" class="navbar-link">Home</a>
-            <a th:href="@{/books}" class="navbar-link active">Libri</a>
-            <a th:href="@{/authors}" class="navbar-link">Autori</a>
-            <a th:href="@{/login}" class="navbar-link">Accedi</a>
-          </div>
+  <header class="header">
+    <nav class="navbar">
+      <div class="navbar-content">
+        <div class="navbar-links-group">
+          <h1 class="navbar-Title">SiwBooks</h1>
         </div>
-      </nav>
-    </header>
+        <div class="navbar-links-group">
+          <a th:href="@{/}" class="navbar-link">Home</a>
+          <a th:href="@{/user/books}" class="navbar-link active">Libri</a>
+          <a th:href="@{/user/authors}" class="navbar-link">Autori</a>
+          <a th:href="@{'/user/' + ${user.id}}" class="navbar-link">Profilo</a>
+          <form th:action="@{/logout}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <button type="submit" class="navbar-link">Esci</button>
+          </form>
+
+
+        </div>
+      </div>
+    </nav>
+  </header>
 
     <main class="details-container">
       <div class="book-details">
@@ -55,7 +61,7 @@
             <div class="authors-list">
               <a
                 th:each="author : ${book.authors}"
-                th:href="@{'/authors/' + ${author.id}}"
+                th:href="@{'/user/authors/' + ${author.id}}"
                 class="author-link"
                 th:text="${author.name + ' ' + author.surname}"
               >
@@ -98,9 +104,29 @@
           <div class="reviews-list" th:if="${#lists.isEmpty(book.reviews)}">
             <h3 class="review-empty">Nessuna recensione</h3>
           </div>
-          <div class="login-to-review">
-            Per scrivere una recensione, <a th:href="@{/login}">accedi qui</a>.
-          </div>
+
+        <div th:unless="${hasReview}">
+          <form th:action="@{'/user/' + ${user.id} + '/books/' + ${book.id} + '/review'}"
+                method="post"
+                class="review-form">
+            <!-- CSRF -->
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+            <input type="text" name="title" placeholder="Titolo" required>
+            <textarea name="text" placeholder="Testo della recensione" required></textarea>
+            <select name="mark" required>
+              <option value="" disabled selected>Valutazione</option>
+              <option th:each = "i : ${#numbers.sequence(1,5)}"
+                      th:value="${i}" th:text="${i}">1</option>
+            </select>
+            <button type="submit">Invia Recensione</button>
+          </form>
+        </div>
+
+        <div th:if="${hasReview}" class="already-reviewed">
+          Hai già commentato!
+        </div>
+
         </div>
     </main>
 

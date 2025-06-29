@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/author.css}">
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+
+</head>
+<body>
+
+    <header class="header">
+    <nav class="navbar">
+      <div class="navbar-content">
+      <div class="navbar-links-group">
+        <h1 class="navbar-Title">SiwBooks</h1>
+      </div>
+      <div class="navbar-links-group">
+        <a th:href="@{/}" class="navbar-link">Home</a>
+        <a th:href="@{/books}" class="navbar-link">Libri</a>
+        <a th:href="@{/authors}" class="navbar-link active">Autori</a>
+        <a th:href="@{/login}" class="navbar-link">Accedi</a>
+          </div>
+      </div>
+    </nav>
+  </header>
+
+    <main class="main-content">
+      <div class="author-card">
+        <img th:if="${author.photo==null}"
+             src="/images/placeholder.jpg" 
+             alt="Nessuna foto autore">
+        <img th:unless="${author.photo==null}"
+             th:src="${author.photo.name}" 
+             th:alt="'Foto di ' + ${author.getFullName()}">
+        <div th:text="'Nome: ' + ${author.name}"></div>
+        <div th:text="'Cognome: ' + ${author.surname}"></div>
+        <div th:text="'Nato il: ' + ${author.birthDate}"></div>
+        <div th:if="${author.deathDate!=null}" th:text="'Morto il: ' + ${author.deathDate}"></div>
+        <div th:text="'Nazionalità: ' + ${#strings.capitalize(#strings.toLowerCase(author.nationality))}"></div>
+      </div>
+
+      <div th:if="${author.books != null and !author.books.empty}">
+          <div th:if="${author.books.empty}" class="empty-message">
+            Nessun libro disponibile
+          </div>
+
+          <div th:unless="${author.books.empty}" class="books-grid">
+            <div th:each="book : ${author.books}" class="book-card">
+              <div class="book-cover-wrapper">
+                <img th:if="${book.images != null and !book.images.empty}"
+                    th:src="${book.images[0].name}"
+                    th:alt="'Copertina di ' + ${book.title}" />
+                <img th:unless="${book.images != null and !book.images.empty}"
+                    src="/images/placeholder.jpg"
+                    alt="Nessuna immagine disponibile" />
+              </div>
+              <div class="book-info">
+                <h2 class="book-title" th:text="${book.title}">Titolo libro</h2>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+
+    <footer class="footer">
+    <div class="footer-content">
+        <p>Siwbooks - La tua libreria digitale</p>
+    </div>
+	</footer>
+
+</body>
+</html>

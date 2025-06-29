@@ -2,7 +2,6 @@
 package it.uniroma3.siwbooks.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +14,20 @@ public class BookService {
 
     @Autowired private BookRepository repo;
 
-    public List<Book> findAll()              { return repo.findAll(); }
-    public Optional<Book> findById(Long id)  { return repo.findById(id); }
+    public List<Book> findAll(){
+         return repo.findAll(); 
+        }
+
+    public Book findById(Long id){
+        return repo.findById(id).orElse(null); 
+    }
 
     /** inserisce o aggiorna */
-    public Book save(Book b) { return repo.save(b); }
+    public Book save(Book b){ 
+        return repo.save(b); 
+    }
+
+    public void deleteById(Long id){
+        repo.deleteById(id);
+    }
 }

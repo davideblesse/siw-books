@@ -21,12 +21,11 @@ public class RegisterController {
      * Mostra la pagina di registrazione.
      */
     @GetMapping("/register")
-    public String showRegistrationForm(Model model) {
-        Credentials creds = new Credentials();
-        creds.setUser(new User());       // ← qui!
-        model.addAttribute("credentials", creds);
-        return "register";
-    }
+	public String showRegister(Model model) {
+		model.addAttribute("user", new User());
+		model.addAttribute("credentials", new Credentials());
+		return "register";
+	}
 
 
     /**

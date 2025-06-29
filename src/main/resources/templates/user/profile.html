@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Catalogo Libri</title>
+  <link rel="stylesheet" th:href="@{/css/layout.css}">
+  <link rel="stylesheet" th:href="@{/css/books.css}">
+</head>
+<body>
+
+  <header class="header">
+    <nav class="navbar">
+      <div class="navbar-content">
+        <div class="navbar-links-group">
+          <h1 class="navbar-Title">SiwBooks</h1>
+        </div>
+        <div class="navbar-links-group">
+          <a th:href="@{/}" class="navbar-link">Home</a>
+          <a th:href="@{/user/books}" class="navbar-link">Libri</a>
+          <a th:href="@{/user/authors}" class="navbar-link">Autori</a>
+          <a th:href="@{'/user/' + ${user.id}}" class="navbar-link active">Profilo</a>
+          <form th:action="@{/logout}" method="post" style="display:inline">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <button type="submit" class="navbar-link">Esci</button>
+          </form>
+
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+    <h1 th:text="'Bentornato ' + ${user.nome}">Bentornato Mario</h1>
+    <p th:text="${user.nome}">Mario</p>
+    <p th:text="${user.cognome}">Rossi</p>
+    <p th:text="${user.email}">example@gmail.com</p>
+
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>Siwbooks - La tua libreria digitale</p>
+    </div>
+  </footer>
+
+
+</body>
+</html>

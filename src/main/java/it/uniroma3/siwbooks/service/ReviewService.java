@@ -16,58 +16,23 @@ public class ReviewService {
     @Autowired private BookRepository   bookRepo;
     @Autowired private UserRepository   userRepo;
 
-    /* ------------- CREA ------------------------------------------------ */
 
-    @Transactional
-    public void addReview(Long bookId, Long userId, Review review) {
-        Book book = bookRepo.findById(bookId)
-                .orElseThrow(() -> new NoSuchElementException("Book not found"));
-        User user = userRepo.findById(userId)
-                .orElseThrow(() -> new NoSuchElementException("User not found"));
-
-        if (existsByUserAndBook(user, book))
-            throw new IllegalStateException("Hai già recensito questo libro");
-
-        review.setBook(book);
-        review.setUser(user);
-        reviewRepo.save(review);
+    public void save(Review review) {
+        if (reviewRepo.existsByUserAndBook(review.getUser(), review.getBook())) {
+        throw new IllegalStateException("Hai già recensito questo libro");
+    }
+       reviewRepo.save(review);
     }
 
-    /* ------------- LEGGI ------------------------------------------------ */
-
-    public boolean existsByUserAndBook(User u, Book b) {
-        return reviewRepo.existsByUserAndBook(u, b);
+    public boolean existsByUserAndBook(User user, Book book){
+        return reviewRepo.existsByUserAndBook(user, book);
     }
 
-    public Review getById(Long id) {
-        return reviewRepo.findById(id)
-               .orElseThrow(() -> new NoSuchElementException("Review not found"));
+    public Review findById(Long id){
+        return reviewRepo.findById(id).orElse(null);
     }
 
-    /* ------------- AGGIORNA -------------------------------------------- */
-
-    @Transactional
-    public void updateReview(Long reviewId, Long userId, Review form) {
-        Review rev = getById(reviewId);
-
-        if (!rev.getUser().getId().equals(userId))
-            throw new SecurityException("Operazione non consentita");
-
-        rev.setTitle(form.getTitle());
-        rev.setText(form.getText());
-        rev.setMark(form.getMark());
-        // nessun save esplicito necessario: la tx commit fa il flush
-    }
-
-    /* ------------- ELIMINA --------------------------------------------- */
-
-    @Transactional
-    public void deleteReview(Long reviewId, Long userId) {
-        Review rev = getById(reviewId);
-
-        if (!rev.getUser().getId().equals(userId))
-            throw new SecurityException("Operazione non consentita");
-
-        reviewRepo.delete(rev);
+    public void deleteById(Long id){
+        reviewRepo.deleteById(id);
     }
 }

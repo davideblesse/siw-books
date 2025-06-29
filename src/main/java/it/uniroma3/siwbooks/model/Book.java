@@ -27,8 +27,8 @@ public class Book {
     @ManyToMany
     private Set<Author> authors = new HashSet<>();
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ImageEntity> images = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<ImageEntity> images = new ArrayList<>();
 
     @OneToMany(
       mappedBy = "book",
@@ -69,11 +69,11 @@ public class Book {
         this.authors = authors;
     }
 
-    public Set<ImageEntity> getImages() {
+    public List<ImageEntity> getImages() {
         return images;
     }
 
-    public void setImages(Set<ImageEntity> images) {
+    public void setImages(List<ImageEntity> images) {
         this.images = images;
     }
 

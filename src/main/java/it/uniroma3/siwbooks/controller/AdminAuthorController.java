@@ -13,7 +13,7 @@ import it.uniroma3.siwbooks.service.AuthorService;
 import it.uniroma3.siwbooks.service.BookService;
 
 @Controller
-public class AdminBookController {
+public class AdminAuthorController {
 
     @Autowired 
     private BookService bookService;
@@ -21,9 +21,9 @@ public class AdminBookController {
     @Autowired 
     private AuthorService authorService;
 
-    @PostMapping("/admin/books/{id}")
+    @PostMapping("/admin/authors/{id}")
     public String deleteBook(@PathVariable("id") Long id){
-        bookService.deleteById(id);
-        return "redirect:/admin/books";
+        authorService.deleteById(id);
+        return "redirect:/admin/authors";
     }
 }

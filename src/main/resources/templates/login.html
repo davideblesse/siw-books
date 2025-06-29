@@ -8,6 +8,10 @@
     <div><label>Password: <input type="password" name="pwd"/></label></div>
     <button type="submit">Login</button>
     <div th:if="${param.error}">Credenziali non valide</div>
+
+    <p class="register-prompt"> Non hai un account?
+      <a href="/register" class="register-link">Registrati qui</a>
+    </p>
   </form>
 </body>
 </html>

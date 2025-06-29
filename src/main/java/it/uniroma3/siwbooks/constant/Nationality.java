@@ -6,6 +6,7 @@ public enum Nationality {
     USA, 
     FRANCE, 
     GERMANY, 
-    JAPAN
+    JAPAN,
+    COLOMBIA
 }
 

@@ -15,6 +15,19 @@ import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Review {
+
+    public Review(@NotEmpty @NotNull String title, @Min(1) @Max(5) int mark, @NotEmpty @NotNull String text, User user,
+            Book book) {
+        this.title = title;
+        this.mark = mark;
+        this.text = text;
+        this.user = user;
+        this.book = book;
+    }
+
+    public Review() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -31,11 +44,12 @@ public class Review {
     @Column(length=2000)
     private String text;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Book book;
+
 
     public Long getId() {
         return id;

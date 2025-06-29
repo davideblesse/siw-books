@@ -1,17 +1,27 @@
-/* books.css */
+/* authors.css */
 
-/* Grid container */
-.books-grid {
+/* 1) grid container */
+.authors-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1.5rem;
   max-width: 1200px;
   margin: 2rem auto;
   padding: 0 1rem;
 }
 
-/* Card base */
-.book-card {
+/* Empty-state */
+.no-content {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+  color: #777;
+}
+
+/* 2) each card */
+.author-card {
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -20,28 +30,20 @@
   flex-direction: column;
   transition: transform 0.2s, box-shadow 0.2s;
 }
-.book-card:hover {
+.author-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }
 
-/* Cover wrapper: fixed height, center & contain */
-.book-cover-wrapper {
+.author-card img {
   width: 100%;
-  height: 260px;
-  background: #f0f0f0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.book-cover-wrapper img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
 }
 
-/* Info area */
-.book-info {
+/* 4) text & button area */
+.author-info {
   padding: 1rem;
   text-align: center;
   flex-grow: 1;
@@ -49,13 +51,13 @@
   flex-direction: column;
   justify-content: space-between;
 }
-.book-title {
+.author-info h2 {
   font-family: 'Merriweather', serif;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   margin-bottom: 0.5rem;
 }
 
-/* Details link/button */
+/* 5) view-details link */
 .view-details-link {
   display: inline-block;
   margin-top: 0.5rem;
@@ -72,20 +74,6 @@
   background-color: #555;
 }
 
-/* Empty message */
-.empty-message {
-  text-align: center;
-  margin: 2rem;
-  font-family: 'Open Sans', sans-serif;
-  color: #666;
-}
-
-/* Responsive tweak */
-@media (max-width: 600px) {
-  .book-cover-wrapper {
-    height: 180px;
-  }
-}
 
 /* DELETE */
 
@@ -112,4 +100,3 @@
 .delete-button:hover {
   background-color: #e04848;
 }
-
