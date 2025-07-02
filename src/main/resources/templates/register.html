@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Catalogo Libri</title>
-  <link rel="stylesheet" th:href="@{/css/layout.css}">
-  <link rel="stylesheet" th:href="@{/css/register.css}">
-</head>
-<body>
 
-    <header class="header">
+<head>
+  <meta charset="UTF-8" />
+  <title>Catalogo Libri</title>
+  <link rel="stylesheet" th:href="@{/css/layout.css}" />
+  <link rel="stylesheet" th:href="@{/css/register.css}" />
+</head>
+
+<body>
+  <header class="header">
     <nav class="navbar">
       <div class="navbar-content">
         <div class="navbar-links-group">
@@ -24,60 +25,66 @@
     </nav>
   </header>
 
+  <div class="register-wrapper">
+    <div class="register-box">
+      <h1>Registrati</h1>
+      <form th:action="@{/register}" th:object="${credentials}" method="post">
+        <!-- Nome -->
+        <div class="form-group">
+          <label for="nome">Nome</label>
+          <input id="nome" th:field="*{user.nome}" />
 
-<div class="register-wrapper">
-  <div class="register-box">
-    <h1>Registrati</h1>
-    <form th:action="@{/register}" th:object="${credentials}" method="post">
-
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input id="username" th:field="*{username}" />
-        <div th:if="${#fields.hasErrors('username')}"
-             th:errors="*{username}"
-             class="field-error">
+          <div th:if="${#fields.hasErrors('user.nome')}" th:errors="*{user.nome}" class="field-error"></div>
         </div>
-      </div>
+        <!-- Cognome -->
+        <div class="form-group">
+          <label for="cognome">Cognome</label>
+          <input id="cognome" th:field="*{user.cognome}" />
 
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input id="password" type="password" th:field="*{password}" />
-        <div th:if="${#fields.hasErrors('password')}"
-             th:errors="*{password}"
-             class="field-error">
+          <div th:if="${#fields.hasErrors('user.cognome')}" th:errors="*{user.cognome}" class="field-error"></div>
         </div>
-      </div>
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" th:field="*{user.email}" />
 
-      <div class="form-group">
-        <label for="nome">Nome</label>
-        <input id="nome" th:field="*{user.nome}" />
-      </div>
+          <div th:if="${#fields.hasErrors('user.email')}" th:errors="*{user.email}" class="field-error"></div>
 
-      <div class="form-group">
-        <label for="cognome">Cognome</label>
-        <input id="cognome" th:field="*{user.cognome}" />
-      </div>
+          <!-- Username -->
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input id="username" th:field="*{username}" />
+            <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="field-error"></div>
+          </div>
+        </div>
+        <!-- Password -->
 
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input id="email" th:field="*{user.email}" />
-      </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" type="password" th:field="*{password}" />
+          <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="field-error"></div>
+        </div>
 
-      <button type="submit">Registrati</button>
+        <!-- Conferma Password -->
 
-      <div th:if="${#fields.hasGlobalErrors()}"
-           th:errors="*{__all__}"
-           class="global-error"></div>
-    </form>
+        <div class="form-group">
+          <label for="confirmPassword">Conferma Password</label>
+          <input id="confirmPassword" type="password" th:field="*{confirmPassword}" />
+          <div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="field-error"></div>
+        </div>
+
+        <button type="submit">Registrati</button>
+
+        <div th:if="${#fields.hasGlobalErrors()}" th:errors="*{__all__}" class="global-error"></div>
+      </form>
+    </div>
   </div>
-</div>
-
 
   <footer class="footer">
     <div class="footer-content">
       <p>Siwbooks - La tua libreria digitale</p>
     </div>
   </footer>
-  
 </body>
+
 </html>

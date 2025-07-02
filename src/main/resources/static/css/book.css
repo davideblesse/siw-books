@@ -245,3 +245,8 @@
   transition: background 0.2s;
 }
 .btn-delete-review:hover { background: #e04848; }
+
+.error {
+    color: red;
+    font-size: small;
+}

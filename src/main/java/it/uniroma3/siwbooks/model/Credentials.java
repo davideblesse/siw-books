@@ -5,10 +5,13 @@ import java.util.Objects;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Transient;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Credentials {
@@ -19,17 +22,23 @@ public class Credentials {
     @Id @GeneratedValue 
     private Long id;
 
-    @NotEmpty 
+    @NotBlank
+	@Size(min=4, max=10)
     private String username;
     
-    @NotEmpty 
+    @NotBlank
+	@Size(min=4)
     private String password;
+
+	@Transient
+	private String confirmPassword;
 
     @NotEmpty 
     private String role = DEFAULT_ROLE;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private User user;
+	@Valid
+    private User user = new User();
 	
 	public String getUsername() {
 		return username;
@@ -87,6 +96,14 @@ public class Credentials {
 		Credentials other = (Credentials) obj;
 		return Objects.equals(username, other.username);
 	}
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
 
 	
 }

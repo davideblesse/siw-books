@@ -71,12 +71,15 @@ public class BookController {
             myReviewEntity = reviewService.findByUserAndBook(user, book);
         }
 
+        model.addAttribute("review", new Review());
+        
         model.addAttribute("myReview", myReviewEntity);
         model.addAttribute("hasReview", hasReview);
         model.addAttribute("book", book);
         model.addAttribute("user", user);
         return "user/book";
     }
+
     @GetMapping("/admin/books")
     public String listAdminBooks(Model model) {
         User user = userService.getCurrentUser();

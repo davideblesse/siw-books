@@ -7,13 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.validation.BindingResult;
 
 import it.uniroma3.siwbooks.model.Book;
 
 import it.uniroma3.siwbooks.model.Review;
 import it.uniroma3.siwbooks.model.User;
 import it.uniroma3.siwbooks.service.*;
+import jakarta.validation.Valid;
 
 @Controller
 public class ReviewController {
@@ -38,9 +39,8 @@ public class ReviewController {
     @PostMapping("/user/{userId}/books/{bookId}/review")
     public String addReview(@PathVariable("userId") Long userId,
                             @PathVariable("bookId")  Long bookId,
-                            @RequestParam("title") String title,
-                            @RequestParam("text") String text,
-                            @RequestParam("mark") int mark,
+                            @Valid @ModelAttribute("review") Review review,
+                            BindingResult bindingResult,
                             Model model) {
         Book book = this.bookService.findById(bookId);
         User user = this.userService.getCurrentUser();
@@ -48,12 +48,27 @@ public class ReviewController {
         if (book == null || user == null || !verifyId(userId, user.getId())){
             return "redirect:/login";
         }
-
         boolean hasReview = reviewService.existsByUserAndBook(user, book);
 
-        model.addAttribute("hasReview", hasReview);
+        if (bindingResult.hasErrors()) {
 
-        this.reviewService.save(new Review(title, mark, text, user, book));
+            Review myReviewEntity = null;
+            if (hasReview) {
+                myReviewEntity = reviewService.findByUserAndBook(user, book);
+            }
+            model.addAttribute("myReview", myReviewEntity);
+            model.addAttribute("hasReview", hasReview);
+            model.addAttribute("book", book);
+            model.addAttribute("user", user);
+            return "user/book";
+        }
+
+        if(!hasReview){
+            review.setUser(user);
+            review.setBook(book);
+            this.reviewService.save(review);
+        }
+
         return "redirect:/user/books/" + bookId;
     }
 
@@ -72,6 +87,8 @@ public class ReviewController {
         }
 
         boolean hasReview = reviewService.existsByUserAndBook(user, book);
+
+
 
         model.addAttribute("hasReview", hasReview);
 
